@@ -1,0 +1,37 @@
+{% extends "test303/base.html" %}
+
+{% block js %}
+<script type="text/javascript">
+    $(document).ready( function() {
+	$(".tabs").bind('change', function(e) {
+	    str = e.target + ""
+	    strings = str.split("#");
+	    $.ajax({
+		url: strings[1],
+		dataType: 'json',
+		success: function(data) {
+		    $("#my-tab-content").html("<p>"+data.content+"</p>");
+		}
+	    })
+	});
+    })
+</script>
+{% endblock %}
+
+
+{% block content %}
+
+<ul data-tabs="tabs" class="tabs">
+  <li class="active"><a href="#home">Home</a></li>
+  <li class=""><a href="#profile">Profile</a></li>
+  <li class=""><a href="#messages">Messages</a></li>
+  <li class=""><a href="#settings">Settings</a></li>
+</li>
+
+</ul>
+<div class="tab-content" id="my-tab-content">
+  <div id="home" class="tab-pane active">
+    <p>Raw denim you probably haven't heard of them jean shorts Austin.</p>
+  </div>
+
+{% endblock %}

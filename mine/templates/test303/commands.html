@@ -1,0 +1,50 @@
+{% extends "test303/base.html" %}
+
+{%block js%}
+<script type="text/javascript">
+    $(document).ready( function() {
+	$('button').click( function() {
+	    current = $(this).attr('id');
+	    console.log('lol');
+	    console.log('clicked: ' + current);
+	    $.ajax({
+		url: current,
+		success: function(data) {
+		    console.log("succes");
+		    $('div#'+current).append(
+		        '<div data-alert="alert" class="alert-message success fade in" style="width: 500px"> \
+		    	<a href="#" class="close">×</a> \
+		    	<p>'+data.message+'</p> \
+                        </div>');
+		},
+		error: function(request, errStr, error) {
+		    console.log(errStr);
+		},
+		dataType: 'json',
+	    });
+	});
+	$('.nav').each( function() {
+	    $(this).removeClass("active");
+	});
+	$('#commands').addClass("active");
+    })
+</script>  
+{%endblock%}
+
+{% block breadcrumb %}
+<li><a href="#">Home</a> <span class="divider">/</span></li>
+<li class="active">commands</li>
+{% endblock %}
+
+{% block content %}
+<dl>
+{% for command in commands %}
+<div id="{{command}}">
+  <div class="page-header">
+    <h4>{{ command|capfirst }}</h4>
+  </div>
+  <button id="{{command}}" class="btn small primary" style="margin-bottom: 10px"href="#">Send command</button>
+</div>
+{% endfor %}
+</dl>
+{% endblock %}

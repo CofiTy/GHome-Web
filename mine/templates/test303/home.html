@@ -1,0 +1,20 @@
+{% extends "test303/base.html" %}
+
+{%block js%}
+<script type="text/javascript">
+$(document).ready( function() {
+    $('.nav').each( function() {
+	$(this).removeClass("active");
+    });
+    $('#home').addClass("active");
+})
+</script>  
+{%endblock%}
+
+{% block breadcrumb %}
+<li class="active"><a href="#">Home</a>
+{% endblock %}
+
+{% block content %}
+<p>Welcome to GHome</p>
+{% endblock %}

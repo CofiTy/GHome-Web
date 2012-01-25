@@ -1,0 +1,34 @@
+{% extends "test303/base.html" %}
+
+{% block js %}
+<script type="text/javascript">
+  $(document).ready( function() {
+      console.log('ready');
+      $('#button').click( function() {
+	  console.log('clicked');
+	  $.ajax({
+	      url: '/json',
+	      success: function(data) {
+		  console.log('/json');
+		  $('#lol').append('<p>'+data.info+'</p>');
+	      },
+	      error: function(request, errStr, error) {
+		  console.log(errStr);
+	      },
+	      dataType: 'json',
+	  });
+      });
+  });
+</script>  
+{% endblock %}
+
+{% block breadcrumb %}
+<li><a href="#">Home</a> <span class="divider">/</span></li>
+<li class="active">form</li>
+{% endblock %}
+
+{% block content %}
+<div id="lol"></div>
+<button id="button" class="btn js-btn" href="#">Do something</button>
+{% endblock %}
+

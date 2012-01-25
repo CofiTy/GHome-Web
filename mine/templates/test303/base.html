@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}Test303{% endblock %}</title>
+
+    <script src="/media/jquery-1.7.1.min.js"></script>
+    <script src="/media/bootstrap-dropdown.js"></script>
+    <!--<script src="/media/bootstrap-tabs.js"></script>-->
+    <script src="/media/bootstrap-alerts.js"></script>
+
+    {% block js %}
+
+    {% endblock %}
+
+    <link rel="stylesheet" href="/media/bootstrap.min.css">
+    <style type="text/css">
+      body {
+      padding-top: 40px;
+      }
+      {% block style %}
+
+      {% endblock %}
+    </style>
+  </head>
+  <body>
+    <div style="z-index: 5;" class="topbar-wrapper">
+      <div data-dropdown="dropdown" class="topbar">
+	<div class="topbar-inner">
+          <div class="container-fluid">
+            <h3><a href="#">GHome</a></h3>
+            <ul class="nav">
+              <li id="home"><a href="/home">Home</a></li>
+              <li id="sensors"><a href="/sensors">Sensors</a></li>
+              <li id="commands"><a href="/commands">Commands</a></li>
+            </ul>
+            <form action="" class="pull-left">
+              <input type="text" placeholder="Search"/>
+            </form>
+            <ul class="nav secondary-nav">
+              <li class="dropdown">
+		<a class="dropdown-toggle" href="#">Help</a>
+
+		<ul class="dropdown-menu">
+                  <li><a href="#">Secondary link</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"/>
+                  <li><a href="#">About</a></li>
+		</ul>
+              </li>
+
+            </ul>
+          </div>
+	</div><!-- /topbar-inner -->
+      </div><!-- /topbar -->
+    </div><!-- /topbar-wrapper -->
+    <ul class="breadcrumb">
+      {% block breadcrumb %}
+      <li class="active"><a href="#">Home</a> <span class="divider">/</span></li>
+      {% endblock %}
+    </ul>
+    <div class="container-fluid">
+      <div class="sidebar">
+	<div class="well">
+	  {% block sidebar %}
+	  <a href="home/">Home</a>
+	  {% endblock %}
+	</div>
+      </div>
+      <div class="content">
+	<div class="well">
+	  {% block content %}
+
+	  {% endblock %}
+	</div>
+      </div>
+    </div>
+  </body>
+</html>
+    

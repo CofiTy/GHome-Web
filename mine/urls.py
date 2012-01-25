@@ -1,0 +1,20 @@
+from django.conf.urls.defaults import patterns, url
+
+# Uncomment the next two lines to enable the admin:
+# from django.contrib import admin
+# admin.autodiscover()
+
+urlpatterns = patterns('test303.mine.views',
+    url(r'^form/$', 'form'),
+    url(r'^thanks/(?P<name>\w+)/$', 'thanks'),
+    url(r'^ajax/$', 'ajax'),
+    url(r'^json/$', 'json'),
+    url(r'^tabs/(?P<tab>\w+)/$', 'tabs_ajax'),                       
+    url(r'^tabs/$', 'tabs'),
+    url(r'^sensors/(?P<type_name>\w+)/(?P<name>\w+)/json$', 'json_sensor'),
+    url(r'^sensors/(?P<type_name>\w+)/(?P<name>\w+)/$', 'sensor'),
+    url(r'^sensors/$', 'sensors'),
+    url(r'^commands/(?P<name>\w+)/$', 'command'),
+    url(r'^commands/$', 'commands'),
+    url(r'^home/$', 'home'),
+)
