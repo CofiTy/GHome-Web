@@ -60,9 +60,12 @@ class Server(object):
                     self.value += random.randint(-4, 4)
                 except:
                     self.value = 21
-
-                data = {parsed["message"][0]: self.value}
-                ans = {"type": 5, "message": [data]}
+                    
+                data = []
+                for sensor_id in parsed["message"]:
+                    data += [{"id": sensor_id, "value": self.value}]
+                    
+                ans = {"type": 5, "message": data}
                 self.send(ans)
 
 

@@ -5,11 +5,19 @@
 ** DONE Get libs
 ** DONE update urls
 
-* TODO Commit
+* TODO Git 
   SCHEDULED: <2012-01-25 Wed>
+** DONE Commit
+** DONE Build archive of needed files
+** README
 
 * TODO Update protocol
   SCHEDULED: <2012-01-25 Wed>
+
+* TODO Work on Model
+* TODO Deploy
+  SCHEDULED: <2012-01-25 Wed>
+** TODO Evaluate task
 
 * TODO Integrate bootstrap 2
   SCHEDULED: <2012-01-25 Wed>

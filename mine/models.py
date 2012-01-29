@@ -31,6 +31,8 @@ class Model(object):
         self.sensors = sensors
         self.commands = commands
 
+        self.cross = {}
+
         if init != None:
             self._from_init(init)
             self.commands = init['commands']
@@ -43,8 +45,15 @@ class Model(object):
         - `init`:
         """
         for sensor in init['sensors']:
+            sens = Sensor(sensor['name'], sensor['id'])
+            self.cross[sensor['id']] = sensor['name']
             try:
-                self.sensors[sensor['type']][sensor['name']] = Sensor(sensor['name'], sensor['id'])
+                self.sensors[sensor['type']][sensor['name']] = sens
             except KeyError:
-                self.sensors[sensor['type']] = {sensor['name']:Sensor(sensor['name'], sensor['id'])}
+                self.sensors[sensor['type']] = {sensor['name']: sens}
 
+    def update_sensor_by_id(self, sensor_type, sensor_id, value):
+        self.sensors[sensor_type][self.cross[sensor_id]].value = value
+
+    def get_name_for_id(self, sensor_id):
+        return self.cross[sensor_id]

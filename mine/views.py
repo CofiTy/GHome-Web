@@ -25,8 +25,16 @@ def sensor(request, type_name, name):
 
 def json_sensor(request, type_name, name):
     try:
-        ans = s.update([m.sensors[type_name][name].ident])
-        d = {"value": ans[0].values()[0]}
+        sensor_id = m.sensors[type_name][name].ident
+
+        #fetch data from server
+        ans = s.update([sensor_id])
+
+        #update model
+        m.update_sensor_by_id(type_name, sensor_id, ans[0]['value'])
+
+        #create json
+        d = {"value": ans[0]['value']}
         js = simplejson.dumps(d)
         print js
         res = HttpResponse(js)
