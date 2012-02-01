@@ -5,7 +5,7 @@ class Server(object):
     """
     """
     __shared_state = {}
-    def __init__(self, host='localhost', port=8080):
+    def __init__(self, host='localhost', port=5003):
         """
         
         Arguments:

@@ -7,7 +7,8 @@ sensor_list = [{"id":1, "name":"tempi", "type": "Temperature"},
 {"id":4, "name":"cuisine", "type": "Temperature"}, 
 {"id":2, "name":"humi", "type": "Humidity"},
 {"id":3, "name":"lumi", "type": "Luminosity"},
-{"id":1, "name":"lumi2", "type": "Luminosity"}]
+#{"id":1, "name":"lumi2", "type": "Luminosity"}
+]
 
 
 class MyTCPHandler(SocketServer.BaseRequestHandler):
@@ -23,7 +24,7 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
 
 class Server(object):
     
-    def __init__(self, host='localhost', port=8080):
+    def __init__(self, host='localhost', port=5003):
         self._host = host
         self._port = port
 
@@ -52,7 +53,7 @@ class Server(object):
                         {"id":4, "name":"cuisine", "type": "Temperature"}, 
                         {"id":2, "name":"humi", "type": "Humidity"},
                         {"id":3, "name":"lumi", "type": "Luminosity"},
-                        {"id":1, "name":"lumi2", "type": "Luminosity"}, 
+                        {"id":5, "name":"prez", "type": "Presence"}, 
                         ], 
                           "commands":["shutdown", "cooldown", "light-off"]}
                 ans = {"type": 2, "message": config}
@@ -68,8 +69,11 @@ class Server(object):
                 data = []
                 for sensor_id in parsed["message"]:
                     l = filter(lambda obj: obj["id"] == sensor_id, sensor_list)
-                    sensor_type = l[0]["type"]
-                    data += [{"id": sensor_id, "value": self.value, "type": sensor_type}]
+                    try:
+                        sensor_type = l[0]["type"]
+                        data += [{"id": sensor_id, "value": self.value, "type": sensor_type}]
+                    except:
+                        pass
                     
                 ans = {"type": 5, "message": data}
                 self.send(ans)
@@ -83,7 +87,7 @@ class Server(object):
 
         
 if __name__ == "__main__":
-    HOST, PORT = "localhost", 8080
+    HOST, PORT = "localhost", 5003
     # server = SocketServer.TCPServer((HOST, PORT), MyTCPHandler)
     # server.serve_forever()
     server = Server()
