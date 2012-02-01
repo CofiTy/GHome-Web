@@ -15,7 +15,12 @@ class Sensor(object):
         self.ident = ident
         self.name = name
         self.value = 0
-        
+
+    def get_id(self):
+        return self.ident
+
+def to_dict(obj):
+    return obj.__dict__
 
 class Model(object):
     """
@@ -57,3 +62,20 @@ class Model(object):
 
     def get_name_for_id(self, sensor_id):
         return self.cross[sensor_id]
+
+    def get_sensor_list(self):
+        ret = []
+        for l in self.sensors.values():
+            ret += l.values()
+
+        return ret
+
+    def get_dict_list(self):
+        ret = map(to_dict, self.get_sensor_list())
+        
+        return ret
+
+    def get_id_list(self):
+        ret = map(Sensor.get_id, self.get_sensor_list())
+        
+        return ret
