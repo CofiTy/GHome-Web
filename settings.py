@@ -1,7 +1,8 @@
 # Django settings for test303 project.
 
 import os
-#ROOT : the django proyect root
+
+#ROOT : the django project root
 ROOT = lambda base : os.path.join(os.path.dirname(__file__), base).replace('\\','/')
 
 DEBUG = True
@@ -104,7 +105,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'test303.urls'
+ROOT_URLCONF = os.path.basename(os.getcwd())+'.urls'
 
 TEMPLATE_DIRS = (
     ROOT("mine/templates/"),
