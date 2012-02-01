@@ -3,6 +3,12 @@ import socket
 import simplejson as json
 import random
 
+sensor_list = [{"id":1, "name":"tempi", "type": "Temperature"}, 
+{"id":4, "name":"cuisine", "type": "Temperature"}, 
+{"id":2, "name":"humi", "type": "Humidity"},
+{"id":3, "name":"lumi", "type": "Luminosity"},
+{"id":1, "name":"lumi2", "type": "Luminosity"}]
+
 
 class MyTCPHandler(SocketServer.BaseRequestHandler):
 
@@ -61,7 +67,9 @@ class Server(object):
                     
                 data = []
                 for sensor_id in parsed["message"]:
-                    data += [{"id": sensor_id, "value": self.value}]
+                    l = filter(lambda obj: obj["id"] == sensor_id, sensor_list)
+                    sensor_type = l[0]["type"]
+                    data += [{"id": sensor_id, "value": self.value, "type": sensor_type}]
                     
                 ans = {"type": 5, "message": data}
                 self.send(ans)
