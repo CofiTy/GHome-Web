@@ -7,21 +7,21 @@ from django.utils import simplejson
 import client
 import models
 
-s = client.Server('localhost', 8080)
+s = client.Server('localhost', 5003)
 m = models.Model(init=s.initialise())
-
-# Test Code
-# m = models.Model()
-# m.sensors["Temperature"] = models.Sensor("Temperature", 1)
-# m.sensors["Humidity"] = models.Sensor("Humidity", 2)
-# m.commands += ["shutdown", "Cool"]
-
 
 def sensors(request):
     #fetch data from server
-    #ans = s.update(m.get_id_list())
+    ans = s.update(m.get_id_list())
+
+    for sensor in ans:
+        m.update_sensor_by_id(sensor['type'], sensor['id'], sensor['value'])
     
     return render_to_response('test303/sensors.html', {'sensors' : m.sensors})
+
+def binary_sensors(request):
+    
+    return render_to_response('test303/binary_sensors.html', {'sensors' : m.sensors['Presence']})
 
 def sensor(request, type_name, name):
     return render_to_response('test303/sensor.html', {'sensor' : m.sensors[type_name][name], 'type': type_name})
@@ -33,11 +33,12 @@ def json_sensor(request, type_name, name):
         #fetch data from server
         ans = s.update([sensor_id])
 
-        #update model
-        m.update_sensor_by_id(type_name, sensor_id, ans[0]['value'])
+        #update model 
+        for sensor in ans:
+            m.update_sensor_by_id(sensor['type'], sensor['id'], sensor['value'])
 
         #create json
-        d = {"value": ans[0]['value']}
+        d = {"value": m.sensors[sensor['type']][name].value}
         js = simplejson.dumps(d)
         print js
         res = HttpResponse(js)

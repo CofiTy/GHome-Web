@@ -1,0 +1,28 @@
+{% extends "test303/base.html" %}
+
+{%block js%}
+<script type="text/javascript">
+$(document).ready( function() {
+    $('.nav').each( function() {
+	$(this).removeClass("active");
+    });
+    $('#sensors').addClass("active");
+})
+</script>
+{%endblock%}
+
+{% block breadcrumb %}
+<li><a href="#">Home</a> <span class="divider">/</span></li>
+<li class="active">sensors</li>
+{% endblock %}
+
+{% block content %}
+<dl>
+{% for k, sensor in sensors.items %}
+<div class="page-header">
+  <h3>{{sensor.name}}</h3>
+</div>
+<button class="btn btn-success" href="#">Present</button>
+{% endfor %}
+</dl>
+{% endblock %}
