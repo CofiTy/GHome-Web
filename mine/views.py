@@ -18,6 +18,9 @@ m = models.Model(init=s.initialise())
 
 
 def sensors(request):
+    #fetch data from server
+    #ans = s.update(m.get_id_list())
+    
     return render_to_response('test303/sensors.html', {'sensors' : m.sensors})
 
 def sensor(request, type_name, name):
@@ -46,6 +49,7 @@ def commands(request):
     return render_to_response('test303/commands.html', {'commands' : m.commands})
 
 def command(request, name):
+    s.command(name)
     response_dict = {}
     response_dict['message'] = "Just sent "+name+" command !"
     return HttpResponse(simplejson.dumps(response_dict), mimetype='application/javascript')
