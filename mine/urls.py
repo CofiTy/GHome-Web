@@ -4,7 +4,7 @@ from django.conf.urls.defaults import patterns, url
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('test303.mine.views',
+urlpatterns = patterns('mine.views',
     url(r'^form/$', 'form'),
     url(r'^thanks/(?P<name>\w+)/$', 'thanks'),
     url(r'^ajax/$', 'ajax'),
