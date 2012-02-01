@@ -50,7 +50,8 @@ class Server(object):
             #Debug
             recv.replace('$', '')
 
-            while not parsed:
+            while not parsed and len(recv) != 0:
+                #print recv[i]
                 if recv[i] == '{':
                     self.op += 1
                 elif recv[i] == '}':
@@ -59,8 +60,13 @@ class Server(object):
                 if self.op == self.cl:
                     finished = True
                     parsed = True
-                    self._rest = recv[i+1:]
-                    ans = recv[:i+1]
+                    try:
+                        self._rest = recv[i+1:]
+                        ans = recv[:i+1]
+                    except IndexError:
+                        self._rest = ""
+                        ans = recv
+
                     print "received " + ans + " left " + self._rest
                     self.op = 0
                     self.cl = 0
