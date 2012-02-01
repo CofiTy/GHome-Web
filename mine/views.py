@@ -21,7 +21,7 @@ def sensors(request):
     return render_to_response('test303/sensors.html', {'sensors' : m.sensors})
 
 def sensor(request, type_name, name):
-    return render_to_response('test303/sensor.html', {'sensor' : m.sensors[type_name][name]})
+    return render_to_response('test303/sensor.html', {'sensor' : m.sensors[type_name][name], 'type': type_name})
 
 def json_sensor(request, type_name, name):
     try:

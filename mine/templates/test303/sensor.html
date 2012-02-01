@@ -11,7 +11,6 @@ $(document).ready( function() {
     });
     $('#sensors').addClass("active");
     var intervalID = window.setInterval( function () {
-    //$('#value').click( function() {
 	console.log("go !");
 	$.ajax({
 	    url: 'json',
@@ -27,19 +26,15 @@ $(document).ready( function() {
 	    },
 	    dataType: 'json',
 	});
-    //});
     }, 5000);
     $(document).ready(function() {
 	chart = new Highcharts.Chart({
             chart: {
 		renderTo: 'container',
 		defaultSeriesType: 'area',
-		// events: {
-                //     load: requestData
-		// }
             },
             title: {
-		text: 'Live random data'
+		text: '{{type}} du capteur {{sensor.name}}'
             },
             xAxis: {
 		type: 'datetime',
@@ -50,18 +45,15 @@ $(document).ready( function() {
 		minPadding: 0.2,
 		maxPadding: 0.2,
 		title: {
-                    text: 'Value',
+                    text: '{{type}}',
                     margin: 80
 		}
             },
             series: [{
-		name: 'Random data',
+		name: '{{sensor.name}}',
 		data: []
             }]
 	});        
-	// chart.series[0].addPoint({x:1326988574, y:100} ,true, false);
-	// chart.series[0].addPoint({x:1326988674, y:50} ,true, false);
-	// chart.series[0].addPoint({x:1326989574, y:10} ,true, false);
     });
 })
 </script>
