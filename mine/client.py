@@ -24,24 +24,52 @@ class Server(object):
             self._sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.connect()
             self._exists = True
+            self._rest = ""
+            self.op = 0
+            self.cl = 0
         
     def connect(self):
         self._sock.connect((self._host, self._port))
 
 
     def send(self, d={}):
-        
         self._sock.send(json.dumps(d)+'$')
 
 
     def send_n_receive(self, d={}):
         self.send(d)
         print "Sent " + str(d)
-        ans = ""
-        while '$' not in ans:
-            ans += self._sock.recv(1024)
+        recv = self._rest
+        finished = False
+        parsed = False
+        i = 0
+
+        while not finished:
+            recv += self._sock.recv(1024)
+            
+            #Debug
+            recv.replace('$', '')
+
+            while not parsed:
+                if recv[i] == '{':
+                    self.op += 1
+                elif recv[i] == '}':
+                    self.cl += 1
+
+                if self.op == self.cl:
+                    finished = True
+                    parsed = True
+                    self._rest = recv[i+1:]
+                    ans = recv[:i+1]
+                    print "received " + ans + " left " + self._rest
+                    self.op = 0
+                    self.cl = 0
+
+                elif i+1 == len(recv):
+                    parsed = False
+
+                i += 1
         
-        ans, t = ans.split('$')
         return ans
 
     def build_mess(self, num, message=None):
