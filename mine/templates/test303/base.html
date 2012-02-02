@@ -4,9 +4,8 @@
     <title>{% block title %}Test303{% endblock %}</title>
 
     <script src="/media/jquery-1.7.1.min.js"></script>
-    <script src="/media/bootstrap-dropdown.js"></script>
+    <script src="/media/bootstrap.min.js"></script>
     <!--<script src="/media/bootstrap-tabs.js"></script>-->
-    <script src="/media/bootstrap-alerts.js"></script>
 
     {% block js %}
 
@@ -15,57 +14,44 @@
     <link rel="stylesheet" href="/media/bootstrap.min.css">
     <style type="text/css">
       body {
-      padding-top: 40px;
+      padding-top: 95px;
       }
       {% block style %}
 
       {% endblock %}
     </style>
   </head>
-  <body>
-    <div style="z-index: 5;" class="topbar-wrapper">
-      <div data-dropdown="dropdown" class="topbar">
-	<div class="topbar-inner">
-          <div class="container-fluid">
-            <h3><a href="#">GHome</a></h3>
+  <body data-spy="scroll" data-target=".subnav" data-offset="50">
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">GHome</a>
+          <div class="nav-collapse">
             <ul class="nav">
               <li id="home"><a href="/home">Home</a></li>
               <li id="sensors"><a href="/sensors">Sensors</a></li>
               <li id="commands"><a href="/commands">Commands</a></li>
             </ul>
-            <form action="" class="pull-left">
-              <input type="text" placeholder="Search"/>
-            </form>
-            <ul class="nav secondary-nav">
-              <li class="dropdown">
-		<a class="dropdown-toggle" href="#">Help</a>
-
-		<ul class="dropdown-menu">
-                  <li><a href="#">Secondary link</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li class="divider"/>
-                  <li><a href="#">About</a></li>
-		</ul>
-              </li>
-
-            </ul>
-          </div>
-	</div><!-- /topbar-inner -->
-      </div><!-- /topbar -->
-    </div><!-- /topbar-wrapper -->
-    <ul class="breadcrumb">
-      {% block breadcrumb %}
-      <li class="active"><a href="#">Home</a> <span class="divider">/</span></li>
-      {% endblock %}
-    </ul>
-    <div class="container-fluid">
-      <div class="sidebar">
-	<div class="well">
-	  {% block sidebar %}
-	  <a href="home/">Home</a>
-	  {% endblock %}
-	</div>
+          </div><!--/.nav-collapse -->
+        </div>
       </div>
+      <ul class="breadcrumb">
+	<div class="container">
+	{% block breadcrumb %}
+	<li class="active"><a href="#">Home</a> <span class="divider">/</span></li>
+	{% endblock %}
+	</div>
+      </ul>
+    </div>
+
+
+    
+    <div class="container">
       <div class="content">
 	<div class="well">
 	  {% block content %}

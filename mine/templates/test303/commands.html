@@ -12,8 +12,9 @@
 		success: function(data) {
 		    console.log("succes");
 		    $('div#'+current).append(
-		        '<div data-alert="alert" class="alert-message success fade in" style="width: 500px"> \
-		    	<a href="#" class="close">×</a> \
+                        '<div class="alert alert-success"> \
+                         <a class="close" data-dismiss="alert">×</a> \
+                         <h4 class="alert-heading">Succes!</h4> \
 		    	<p>'+data.message+'</p> \
                         </div>');
 		},

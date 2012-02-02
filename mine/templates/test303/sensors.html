@@ -17,8 +17,20 @@ $(document).ready( function() {
 {% endblock %}
 
 {% block content %}
+
+<header class="subhead" id="overview">
+  <div class="subnav">
+    <ul class="nav nav-pills">
+      {%for type_name, type in sensors.items%}
+      <li><a href="#{{type_name}}">{{type_name}}</a></li>
+      {%endfor%}
+    </ul>
+  </div>
+</header>
+
 <dl>
 {% for type_name, type in sensors.items %}
+<section id="{{type_name}}">
 <div class="page-header">
   <h3>{{type_name}}</h3>
 </div>
@@ -27,5 +39,6 @@ $(document).ready( function() {
   <dd>Value : {{ sensor.value }}</dd>
 {% endfor %}
 {% endfor %}
+</section>
 </dl>
 {% endblock %}
