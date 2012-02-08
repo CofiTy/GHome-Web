@@ -6,10 +6,14 @@
 <script type="text/javascript">
     var chart;
 $(document).ready( function() {
+    //Set crumbs
     $('.nav').each( function() {
 	$(this).removeClass("active");
     });
     $('#sensors').addClass("active");
+
+
+    //Automatic updates
     var intervalID = window.setInterval( function () {
 	console.log("go !");
 	$.ajax({
@@ -27,33 +31,33 @@ $(document).ready( function() {
 	    dataType: 'json',
 	});
     }, 5000);
-    $(document).ready(function() {
-	chart = new Highcharts.Chart({
-            chart: {
-		renderTo: 'container',
-		defaultSeriesType: 'area',
-            },
-            title: {
-		text: '{{type}} du capteur {{sensor.name}}'
-            },
-            xAxis: {
-		type: 'datetime',
-		tickPixelInterval: 150,
-		maxZoom: 20 * 1000
-            },
-            yAxis: {
-		minPadding: 0.2,
-		maxPadding: 0.2,
-		title: {
-                    text: '{{type}}',
-                    margin: 80
-		}
-            },
-            series: [{
-		name: '{{sensor.name}}',
-		data: []
-            }]
-	});        
+
+    //Set up graph
+    chart = new Highcharts.Chart({
+        chart: {
+	    renderTo: 'container',
+	    defaultSeriesType: 'area',
+        },
+        title: {
+	    text: '{{type}} du capteur {{sensor.name}}'
+        },
+        xAxis: {
+	    type: 'datetime',
+	    tickPixelInterval: 150,
+	    maxZoom: 20 * 1000
+        },
+        yAxis: {
+	    minPadding: 0.2,
+	    maxPadding: 0.2,
+	    title: {
+                text: '{{type}}',
+                margin: 80
+	    }
+        },
+        series: [{
+	    name: '{{sensor.name}}',
+	    data: []
+        }]
     });
 })
 </script>
