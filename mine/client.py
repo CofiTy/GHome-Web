@@ -111,6 +111,13 @@ class Server(object):
 
 
 
+    def history(self, sensor, rollback):
+        mess = self.build_mess(7, {"id": sensor, "rollback": rollback})
+        ans = self.send_n_receive(mess)
+
+        return json.loads(ans)['message']
+
+
     def close(self):
         mess = self.build_mess(6)
         self.send(mess)
