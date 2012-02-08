@@ -22,6 +22,7 @@ class Server(object):
             self._host = host
             self._port = port
             self._sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self._sock.settimeout(3.0)
             self.connect()
             self._exists = True
             self._rest = ""
@@ -51,7 +52,6 @@ class Server(object):
             recv.replace('$', '')
 
             while not parsed and len(recv) != 0:
-                #print recv[i]
                 if recv[i] == '{':
                     self.op += 1
                 elif recv[i] == '}':
