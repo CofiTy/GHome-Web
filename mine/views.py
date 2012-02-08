@@ -19,8 +19,7 @@ def sensors(request):
     
     return render_to_response('test303/sensors.html', {'sensors' : m.sensors})
 
-def binary_sensors(request):
-    
+def binary_sensors(request):    
     return render_to_response('test303/binary_sensors.html', {'sensors' : m.sensors['Presence']})
 
 def sensor(request, type_name, name):
@@ -45,6 +44,13 @@ def json_sensor(request, type_name, name):
     except Exception as e:
         print e
     return res
+
+def json_sensor_init(request, type_name, name):
+    values = s.history(type_name, name)
+    js = simplejson.dumps(values)
+    
+    return HttpResponse(js)
+    
 
 def commands(request):
     return render_to_response('test303/commands.html', {'commands' : m.commands})

@@ -12,6 +12,24 @@ $(document).ready( function() {
     });
     $('#sensors').addClass("active");
 
+    //Add existing values to graph
+    $.ajax({
+	url: 'init',
+	success: function(data) {
+	    console.log('-init ' + data.value);
+	    data.value.each(function(index) {
+		$('#value').html(data.value[index]['value']);
+		chart.series[0].addPoint({x: data.value[index]['timestamp'],
+					  y: data.value[index]['value']},
+					 true, 
+					 chart.series[0].data.length > 20);
+	    })
+	},
+	error: function(request, errStr, error) {
+	    console.log(errStr);
+	},
+	dataType: 'json',
+    });
 
     //Automatic updates
     var intervalID = window.setInterval( function () {
@@ -19,7 +37,7 @@ $(document).ready( function() {
 	$.ajax({
 	    url: 'json',
 	    success: function(data) {
-		console.log('-json' + data.value);
+		console.log('-json ' + data.value);
 		$('#value').html(data.value);
 		chart.series[0].addPoint({x:Date.now(), y: data.value} ,
 					 true, 
