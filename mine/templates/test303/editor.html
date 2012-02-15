@@ -7,15 +7,16 @@
 	    console.log('lol');
 	    $.ajax({
 		url: 'json',
+		type: 'POST',
+		data: {'data': $('#textarea').text()},
 		success: function(data) {
 		    console.log("succes");
-
 		    //Error occured server side
 		    $('#field').addClass("error");
 		    $('#field').append('<div class="alert alert-error"> \
                          <a class="close" data-dismiss="alert">×</a> \
                          <h4 class="alert-heading">The file was refused by GHome !!</h4> \
-                        </div>');
+                         </div>');
 		},
 		error: function(request, errStr, error) {
 		    console.log(errStr);
@@ -49,7 +50,7 @@
     <div class="control-group" id="field">
       <label class="control-label" for="textarea">{{type|capfirst}}</label>
       <div class="controls">
-	<textarea class="input-xlarge" id="textarea" rows="3"></textarea>
+	<textarea class="input-xlarge" id="textarea" rows="3">{{text}}</textarea>
       </div>
     </div>
     <div class="form-actions">
