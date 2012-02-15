@@ -60,8 +60,14 @@ def command(request, name):
     response_dict['message'] = "Just sent "+name+" command !"
     return HttpResponse(simplejson.dumps(response_dict), mimetype='application/javascript')
 
-def editor(request):
-    return render_to_response('test303/editor.html')
+def editor(request, name="default"):
+    return render_to_response('test303/editor.html', {"type": name})
+
+def json_editor(request, name="default"):
+    return HttpResponse(simplejson.dumps({}), mimetype='application/javascript')
+
+def editors(request):
+    return render_to_response('test303/editors.html')
 
 def home(request):
     return render_to_response('test303/home.html')
