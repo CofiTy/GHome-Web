@@ -10,6 +10,8 @@ import models
 s = client.Server('localhost', 5003)
 m = models.Model(init=s.initialise())
 
+cross = {'rules':1, 'actions':2, 'activators':3, 'sensors':4}
+
 def sensors(request):
     #fetch data from server
     ans = s.update(m.get_id_list())
@@ -61,7 +63,9 @@ def command(request, name):
     return HttpResponse(simplejson.dumps(response_dict), mimetype='application/javascript')
 
 def editor(request, name="default"):
-    return render_to_response('test303/editor.html', {"type": name})
+    data = s.edits(cross[name])
+
+    return render_to_response('test303/editor.html', {"type": name, "text": data})
 
 def json_editor(request, name="default"):
     return HttpResponse(simplejson.dumps({}), mimetype='application/javascript')
