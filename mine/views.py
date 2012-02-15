@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django import forms
 from django.template import RequestContext, loader
 from django.utils import simplejson
+import copy
 import client
 import models
 
@@ -65,10 +66,16 @@ def command(request, name):
 def editor(request, name="default"):
     data = s.edits(cross[name])
 
-    return render_to_response('test303/editor.html', {"type": name, "text": data})
+    return render_to_response('test303/editor.html', {"type": name, "text": data['file']})
 
 def json_editor(request, name="default"):
-    return HttpResponse(simplejson.dumps({}), mimetype='application/javascript')
+    ans = {}
+    if request.method == 'POST':
+        mess  = request.POST.copy()
+        mess = mess['data']
+        s.edata(cross[name], mess)
+
+    return HttpResponse(simplejson.dumps(ans), mimetype='application/javascript')
 
 def editors(request):
     return render_to_response('test303/editors.html')
