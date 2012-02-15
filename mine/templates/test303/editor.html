@@ -2,7 +2,8 @@
 
 {% block breadcrumb %}
 <li><a href="#">Home</a> <span class="divider">/</span></li>
-<li class="active">commands</li>
+<li><a href="#">Editors</a> <span class="divider">/</span></li>
+<li class="active">{{type|capfirst}}</li>
 {% endblock %}
 
 {% block content %}
