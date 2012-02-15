@@ -119,17 +119,30 @@ class Server(object):
         return json.loads(ans)['message']
 
 
+
     def logs(self):
         mess = self.build_mess(9)
         ans = self.send_n_receive(mess)
 
         return json.loads(ans)['message']
 
+
+
     def edits(self, name):
         mess = self.build_mess(11, name)
         ans = self.send_n_receive(mess)
 
         return json.loads(ans)['message']
+
+
+
+    def edata(self, name, blob):
+        mess = self.build_mess(12,{"name": name, "file": blob})
+        ans = self.send_n_receive(mess)
+
+        return json.loads(ans)['message']
+
+
 
     def close(self):
         mess = self.build_mess(6)
