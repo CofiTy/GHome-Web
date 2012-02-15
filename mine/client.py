@@ -47,8 +47,10 @@ class Server(object):
 
         while not finished:
             
-            recv += self._sock.recv(1024)
+            recv += self._sock.recv(8192)
             
+            print len(recv)
+
             #Debug
             recv.replace('$', '')
 
@@ -57,7 +59,7 @@ class Server(object):
                     self.op += 1
                 elif recv[i] == '}':
                     self.cl += 1
-
+                        
                 if self.op == self.cl:
                     finished = True
                     parsed = True
@@ -137,7 +139,7 @@ class Server(object):
 
 
     def edata(self, name, blob):
-        mess = self.build_mess(12,{"name": name, "file": blob})
+        mess = self.build_mess(12, {"name": name, "file": blob})
         ans = self.send_n_receive(mess)
 
         return json.loads(ans)['message']
