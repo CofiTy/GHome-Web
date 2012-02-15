@@ -50,7 +50,6 @@ def json_sensor_init(request, type_name, name):
     js = simplejson.dumps(values)
     
     return HttpResponse(js)
-    
 
 def commands(request):
     return render_to_response('test303/commands.html', {'commands' : m.commands})
@@ -60,6 +59,9 @@ def command(request, name):
     response_dict = {}
     response_dict['message'] = "Just sent "+name+" command !"
     return HttpResponse(simplejson.dumps(response_dict), mimetype='application/javascript')
+
+def editor(request):
+    return render_to_response('test303/editor.html')
 
 def home(request):
     return render_to_response('test303/home.html')

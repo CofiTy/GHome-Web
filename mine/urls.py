@@ -19,4 +19,5 @@ urlpatterns = patterns('mine.views',
     url(r'^commands/(?P<name>\w+)/$', 'command'),
     url(r'^commands/$', 'commands'),
     url(r'^home/$', 'home'),
+    url(r'^editor/$', 'editor'),
 )
