@@ -46,6 +46,7 @@ class Server(object):
         i = 0
 
         while not finished:
+            
             recv += self._sock.recv(1024)
             
             #Debug
@@ -113,6 +114,13 @@ class Server(object):
 
     def history(self, sensor, rollback):
         mess = self.build_mess(7, {"id": sensor, "rollback": rollback})
+        ans = self.send_n_receive(mess)
+
+        return json.loads(ans)['message']
+
+
+    def logs(self):
+        mess = self.build_mess(9)
         ans = self.send_n_receive(mess)
 
         return json.loads(ans)['message']
