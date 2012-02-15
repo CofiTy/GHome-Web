@@ -1,0 +1,39 @@
+{% extends "test303/base.html" %}
+
+
+{% block breadcrumb %}
+<li><a href="#">Home</a> <span class="divider">/</span></li>
+<li class="active">Editors</li>
+{% endblock %}
+
+{% block content %}
+<dl>
+<section id="rules">
+  <div class="page-header">
+    <h4>Rules</h4>
+  </div>
+  <button id="{{command}}" class="btn small primary" style="margin-bottom: 10px"href="#">Send command</button>
+</section>
+
+<section id="actions">
+  <div class="page-header">
+    <h4>Actions</h4>
+  </div>
+  <button id="{{command}}" class="btn small primary" style="margin-bottom: 10px"href="#">Send command</button>
+</section>
+
+<section id="config">
+  <div class="page-header">
+    <h4>Configuration</h4>
+  </div>
+  <button id="{{command}}" class="btn small primary" style="margin-bottom: 10px"href="#">Send command</button>
+</section>
+
+<section id="plop">
+  <div class="page-header">
+    <h4>Plop</h4>
+  </div>
+  <button id="{{command}}" class="btn small primary" style="margin-bottom: 10px"href="#">Send command</button>
+</section>
+</dl>
+{% endblock %}
