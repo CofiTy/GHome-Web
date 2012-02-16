@@ -8,9 +8,10 @@
 	    $.ajax({
 		url: 'json',
 		type: 'POST',
-		data: {'data': $('#textarea').text()},
+		data: {'data': $('#textarea').val()},
 		success: function(data) {
 		    console.log("succes");
+		    console.log(data.state);
 		    //Error occured server side
 		    $('#field').addClass("error");
 		    $('#field').append('<div class="alert alert-error"> \
