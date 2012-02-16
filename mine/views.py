@@ -73,7 +73,7 @@ def json_editor(request, name="default"):
     if request.method == 'POST':
         mess  = request.POST.copy()
         mess = mess['data']
-        s.edata(cross[name], mess)
+        ans = s.edata(cross[name], mess)
 
     return HttpResponse(simplejson.dumps(ans), mimetype='application/javascript')
 
