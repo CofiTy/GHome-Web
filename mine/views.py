@@ -4,7 +4,6 @@ from django.http import HttpResponse
 from django import forms
 from django.template import RequestContext, loader
 from django.utils import simplejson
-import copy
 import client
 import models
 
@@ -49,7 +48,8 @@ def json_sensor(request, type_name, name):
     return res
 
 def json_sensor_init(request, type_name, name):
-    values = s.history(type_name, name)
+    sensor_id = m.sensors[type_name][name].ident
+    values = s.history(sensor_id, 20)
     js = simplejson.dumps(values)
     
     return HttpResponse(js)
