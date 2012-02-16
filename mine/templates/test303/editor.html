@@ -10,14 +10,23 @@
 		type: 'POST',
 		data: {'data': $('#textarea').val()},
 		success: function(data) {
-		    console.log("succes");
+		    console.log("success");
 		    console.log(data.state);
 		    //Error occured server side
-		    $('#field').addClass("error");
-		    $('#field').append('<div class="alert alert-error"> \
-                         <a class="close" data-dismiss="alert">×</a> \
-                         <h4 class="alert-heading">The file was refused by GHome !!</h4> \
-                         </div>');
+		    if (data['state'] == 0) {
+			$('#field').addClass("error");
+			$('#field').append('<div class="alert alert-error"> \
+                                            <a class="close" data-dismiss="alert">×</a> \
+                                            <h4 class="alert-heading">'+data.info+'</h4> \
+                                            </div>');
+		    } 
+		    else {
+			$('#field').removeClass("error");
+			$('#field').append('<div class="alert alert-success"> \
+                                            <a class="close" data-dismiss="alert">×</a> \
+                                            <h4 class="alert-heading">'+data.info+'</h4> \
+                                            </div>');
+		    }
 		},
 		error: function(request, errStr, error) {
 		    console.log(errStr);
