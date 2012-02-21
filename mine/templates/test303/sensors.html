@@ -34,10 +34,14 @@ $(document).ready( function() {
 <div class="page-header">
   <h3>{{type_name}}</h3>
 </div>
-{% for k, sensor in type.items %}
-  <dt><a href="{{type_name}}/{{sensor.name}}"> {{sensor.name}} </a></dt>
-  <dd>Value : {{ sensor.value }}</dd>
-{% endfor %}
+<div class="row">
+  {% for k, sensor in type.items %}
+  <div class="span4">
+    <dt><a href="{{type_name}}/{{sensor.name}}"> {{sensor.name}} </a></dt>
+    <dd>Value : {{ sensor.value }}</dd>
+  </div>
+  {% endfor %}
+</div>
 {% endfor %}
 </section>
 </dl>
