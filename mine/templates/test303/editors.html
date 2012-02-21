@@ -1,5 +1,15 @@
 {% extends "test303/base.html" %}
 
+{% block js %}
+<script type="text/javascript">
+$(document).ready( function() {
+  $('.nav').each( function() {
+    $(this).removeClass("active");
+  });
+  $('#editors').addClass("active");
+});
+</script>
+{% endblock %}
 
 {% block breadcrumb %}
 <li><a href="#">Home</a> <span class="divider">/</span></li>
