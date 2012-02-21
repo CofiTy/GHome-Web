@@ -70,7 +70,6 @@ class Server(object):
                         self._rest = ""
                         ans = recv
 
-                    print "received " + ans + " left " + self._rest
                     self.op = 0
                     self.cl = 0
 
