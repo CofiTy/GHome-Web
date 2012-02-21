@@ -48,10 +48,19 @@ def json_sensor(request, type_name, name):
     return res
 
 def json_sensor_init(request, type_name, name):
+    print "in json_sensor_init with type " + type_name
     sensor_id = m.sensors[type_name][name].ident
     values = s.history(sensor_id, 20)
-    js = simplejson.dumps(values)
-    
+
+    #mapped = map(lambda hdata: [hdata] if hdata['type'] is type_name else [], js)
+    #reduced = reduce(lambda x, y: x+y if y is not [] else x, mapped)
+
+    res = []
+    for hdata in values:
+        if hdata['type'] == type_name.lower():
+            res += [hdata]
+
+    js = simplejson.dumps(res)
     return HttpResponse(js)
 
 def commands(request):
