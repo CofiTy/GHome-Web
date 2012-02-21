@@ -11,12 +11,19 @@
 		url: current,
 		success: function(data) {
 		    console.log("succes");
+		    id = Date.now();
 		    $('div#'+current).append(
-                        '<div class="alert alert-success"> \
+                        '<div id="'+id+'" class="alert alert-success fade in"> \
                          <a class="close" data-dismiss="alert">×</a> \
                          <h4 class="alert-heading">Succes!</h4> \
 		    	<p>'+data.message+'</p> \
                         </div>');
+		    setTimeout( function() {
+			inner_id = id;
+			$('#'+inner_id).alert('close');
+		    },
+				2000
+			      )
 		},
 		error: function(request, errStr, error) {
 		    console.log(errStr);
@@ -24,6 +31,14 @@
 		dataType: 'json',
 	    });
 	});
+	
+	setInterval(function() {
+	    console.log('clean up');
+	    $('.alert').alert('close')
+	},
+		    6000
+		   );
+	
 	$('.nav').each( function() {
 	    $(this).removeClass("active");
 	});
@@ -44,7 +59,11 @@
   <div class="page-header">
     <h4>{{ command|capfirst }}</h4>
   </div>
-  <button id="{{command}}" class="btn small primary" style="margin-bottom: 10px"href="#">Send command</button>
+  <div class="row">
+    <div class="span8">
+      <button id="{{command}}" class="btn btn-primary" style="margin-bottom: 10px" href="#">Send command</button>
+    </div>
+  </div>
 </div>
 {% endfor %}
 </dl>
