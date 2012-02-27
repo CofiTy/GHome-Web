@@ -58,7 +58,12 @@ class Model(object):
                 self.sensors[sensor['type']] = {sensor['name']: sens}
 
     def reset(self, data):
+        for i in self.sensors.keys():
+            self.sensors[i].clear()
+        self.sensors.clear()
+        
         self.__init__(init=data)
+
 
     def update_sensor_by_id(self, sensor_type, sensor_id, value):
         self.sensors[sensor_type][self.cross[sensor_id]].value = value
