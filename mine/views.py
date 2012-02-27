@@ -43,8 +43,8 @@ def json_sensor(request, type_name, name):
         js = simplejson.dumps(d)
         print js
         res = HttpResponse(js)
-    except Exception as e:
-        print e
+    except Exception :
+        pass
     return res
 
 def json_sensor_init(request, type_name, name):
@@ -57,7 +57,7 @@ def json_sensor_init(request, type_name, name):
 
     res = []
     for hdata in values:
-        if hdata['type'] == type_name.lower():
+        if hdata['type'] == type_name:
             res += [hdata]
 
     js = simplejson.dumps(res)
