@@ -23,4 +23,5 @@ urlpatterns = patterns('mine.views',
     url(r'^editors/(?P<name>\w+)/$', 'editor'),
     url(r'^editors/(?P<name>\w+)/json$', 'json_editor'),
     url(r'^editors/$', 'editors'),
+    url(r'^reset/$', 'reset'),
 )

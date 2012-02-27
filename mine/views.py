@@ -84,6 +84,9 @@ def json_editor(request, name="default"):
         mess = mess['data']
         ans = s.edata(cross[name], mess)
 
+        if ans['state'] == 1:
+            m.reset(s.initialise())
+
     return HttpResponse(simplejson.dumps(ans), mimetype='application/javascript')
 
 def editors(request):
@@ -91,7 +94,11 @@ def editors(request):
 
 def home(request):
     return render_to_response('test303/home.html')
-    
+
+def reset(request):
+    m.reset(s.initialise())
+
+    return render_to_response('test303/home.html')
 
 
 ############################################################################caca
