@@ -1,6 +1,9 @@
 {% extends "test303/base.html" %}
 
 {%block js%}
+<link rel="stylesheet" href="/media/CodeMirror2/lib/codemirror.css">
+<script src="/media/CodeMirror2/lib/codemirror.js" type="text/javascript"></script>
+<script src="/media/CodeMirror2/mode/properties/properties.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready( function() {
 	$('#save').click( function() {
@@ -8,7 +11,7 @@
 	    $.ajax({
 		url: 'json',
 		type: 'POST',
-		data: {'data': $('#textarea').val()},
+		data: {'data': $('#code').val()},
 		success: function(data) {
 		    console.log("success");
 		    console.log(data.state);
@@ -43,8 +46,24 @@
 	    $(this).removeClass("active");
 	});
 	$('#editors').addClass("active");
+	var myCodeMirror = CodeMirror.fromTextArea($('#code')[0], {
+	    lineNumbers: true,
+	});
     })
 </script>
+{%endblock%}
+
+{%block style%}
+    .CodeMirror {
+        border: 1px solid black;
+	background: white;
+    }
+    .CodeMirror-scroll {
+        height: auto;
+        overflow-y: hidden;
+        overflow-x: auto;
+        width: 100%;
+    }
 {%endblock%}
 
 {% block breadcrumb %}
@@ -57,9 +76,9 @@
 <form>
   <fieldset>
     <div class="control-group" id="field">
-      <label class="control-label" for="textarea">{{type|capfirst}}</label>
+      <label class="control-label" for="code">{{type|capfirst}}</label>
       <div class="controls">
-	<textarea class="input-xlarge" style="width: 95%;" id="textarea" rows="3">{{text}}</textarea>
+	<textarea class="input-xlarge" id="code">{{text}}</textarea>
       </div>
     </div>
     <div class="form-actions">
