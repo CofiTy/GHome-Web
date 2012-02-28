@@ -1,0 +1,30 @@
+{% extends "test303/base.html" %}
+
+{%block js%}
+<script type="text/javascript">
+$(document).ready( function() {
+    $('.nav').each( function() {
+	$(this).removeClass("active");
+    });
+    $('#home').addClass("active");
+})
+</script>  
+{%endblock%}
+
+{% block breadcrumb %}
+<li class="active"><a href="#">Home</a>
+{% endblock %}
+
+{% block content %}
+  <div class="hero-unit">
+    <h1>Oooops !</h1>
+    <p>We did something wrong ...</p>
+    <br />
+    <p>Please try again in a few seconds, ;)</p>
+    <p>
+      <a class="btn btn-primary btn-large" href="">
+	Try again
+      </a>
+    </p>
+  </div>
+{% endblock %}
