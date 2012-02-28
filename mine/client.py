@@ -21,20 +21,30 @@ class Server(object):
             print "Create"
             self._host = host
             self._port = port
-            self._sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self._sock.settimeout(3.0)
+            self.mk_sock()
             self.connect()
             self._exists = True
             self._rest = ""
             self.op = 0
             self.cl = 0
+
+    def mk_sock(self):
+        self._sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self._sock.settimeout(3.0)
+
         
     def connect(self):
         self._sock.connect((self._host, self._port))
 
 
     def send(self, d={}):
-        self._sock.send(json.dumps(d)+'$')
+        try:
+            self._sock.send(json.dumps(d))
+        except IOError:
+            self._sock.close()
+            self.mk_sock()
+            self.connect()
+            self.send(d)
 
 
     def send_n_receive(self, d={}):
@@ -56,6 +66,7 @@ class Server(object):
 
             if len(recv) == 0:
                 finished = True
+                ans = ""
 
             while not parsed and len(recv) != 0:
                 if recv[i] == '{':
