@@ -25,14 +25,11 @@ $(document).ready( function() {
         xAxis: {
 	    type: 'datetime',
 	    tickPixelInterval: 150,
-	    maxZoom: 20 * 1000
         },
         yAxis: {
-	    minPadding: 0.2,
-	    maxPadding: 0.2,
 	    title: {
                 text: '{{type}}',
-                margin: 80
+                //margin: 80
 	    }
         },
         series: [{
@@ -41,18 +38,27 @@ $(document).ready( function() {
         }]
     });
 
+
     //Add existing values to graph
     $.ajax({
 	url: 'init',
 	success: function(data) {
 	    console.log('-init ' + data);
+
+	    var max = 0;
 	    data.forEach(function(element, index, array) {
+		if (element['value'] > max){
+		    max = element['value'];
+		}
 		$('#value').html(element['value']);
 		console.log("{x:"+element['timestamp']+",y:"+element['value']+"}");
 		chart.series[0].addPoint({x: element['timestamp'] * 1000, y: element['value']},
 					 true,
 					 chart.series[0].data.length > 20);
 	    })
+	    console.log("max :" + max);
+	    chart.yAxis[0].setExtremes(0, max);
+	    
 	},
 	error: function(request, errStr, error) {
 	    console.log(errStr);
@@ -71,6 +77,10 @@ $(document).ready( function() {
 		chart.series[0].addPoint({x:Date.now(), y: data.value} ,
 					 true, 
 					 chart.series[0].data.length > 20);
+
+		if (data.value > chart.yAxis[0].getExtremes()['max']){
+		    chart.yAxis[0].setExtremes(0, data.value);
+		}
 	    },
 	    error: function(request, errStr, error) {
 		console.log(errStr);
