@@ -16,5 +16,34 @@ $(document).ready( function() {
 {% endblock %}
 
 {% block content %}
-<p>Welcome to GHome</p>
+  <div class="hero-unit">
+    <h1>Welcome to Ghome !</h1>
+    <p>
+    <p>Anything is possible !</p>
+    <p>
+    <br />
+    <div class="page-header">
+      <h3>Check the sensors !</h3>
+    </div>
+    <p>      
+      <a class="btn btn-primary btn-large" href="/sensors">
+	Monitor them
+      </a>
+    </p>
+    <div class="page-header">
+      <h3>Or just use the built-in commands !</h3>
+    </div>
+    <p>      
+      <a class="btn btn-primary btn-large" href="/commands">
+	Try them out
+      </a>
+    </p>
+    <div class="page-header">
+      <h3>Feel like customizing, add your own stuff !</h3>
+    </div>
+    <p>      
+      <a class="btn btn-primary btn-large" href="/editors">
+	Edit that stuff
+      </a>
+    </p>
 {% endblock %}
