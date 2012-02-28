@@ -5,6 +5,8 @@ from django.conf import settings
 # from django.contrib import admin
 # admin.autodiscover()
 
+handler500 = 'mine.views.server_error'
+
 urlpatterns = patterns('',
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes':True}),
     url(r'', include('mine.urls')),

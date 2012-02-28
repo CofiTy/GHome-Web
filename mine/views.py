@@ -100,6 +100,12 @@ def reset(request):
 
     return render_to_response('test303/home.html')
 
+def server_error(request, template_name='test303/500.html'):
+
+    return render_to_response(template_name,
+        context_instance = RequestContext(request)
+    )
+
 
 ############################################################################caca
 

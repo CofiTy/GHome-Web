@@ -5,7 +5,7 @@ import os
 #ROOT : the django project root
 ROOT = lambda base : os.path.join(os.path.dirname(__file__), base).replace('\\','/')
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
