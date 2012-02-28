@@ -39,7 +39,7 @@ def json_sensor(request, type_name, name):
             m.update_sensor_by_id(sensor['type'], sensor['id'], sensor['value'])
 
         #create json
-        d = {"value": m.sensors[sensor['type']][name].value}
+        d = {"value": m.sensors[type_name][name].value}
         js = simplejson.dumps(d)
         print js
         res = HttpResponse(js)
