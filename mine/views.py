@@ -83,6 +83,8 @@ def json_editor(request, name="default"):
         mess  = request.POST.copy()
         mess = mess['data']
         ans = s.edata(cross[name], mess)
+        
+        print "Debug: "+str(ans)
 
         if ans['state'] == 1:
             m.reset(s.initialise())

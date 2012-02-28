@@ -90,7 +90,7 @@ class Server(object):
                     self.cl = 0
 
                 elif i+1 == len(recv):
-                    parsed = False
+                    parsed = True
 
                 i += 1
         
