@@ -39,8 +39,10 @@ class Server(object):
 
     def send(self, d={}):
         try:
+            print "ok"
             self._sock.send(json.dumps(d))
-        except IOError:
+        except:
+            print "except"
             self._sock.close()
             self.mk_sock()
             self.connect()
