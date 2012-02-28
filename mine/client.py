@@ -54,6 +54,9 @@ class Server(object):
             #Debug
             recv.replace('$', '')
 
+            if len(recv) == 0:
+                finished = True
+
             while not parsed and len(recv) != 0:
                 if recv[i] == '{':
                     self.op += 1
